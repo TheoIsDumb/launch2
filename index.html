@@ -19,12 +19,24 @@
 
         <span class="year font-[nokia-italic] ml-auto mt-[-10px]">hello</span>
     </div>
+
+    <div class="appsContainer bg-white/20 rounded-lg
+    fixed bottom-12 left-1/2 -translate-x-1/2 h-96 w-[calc(100dvw-5rem)] overflow-auto
+    p-4 flex flex-col items-start gap-2 font-['nokia-italic']"></div>
+
+    <template id="itemTemplate">
+        <div class="app-list-item">
+            <span class="label"></span>
+        </div>
+    </template>
 </body>
 
 <script>
     const indianTimeDiv = document.querySelector('span.india');
     const yearDiv = document.querySelector('span.year');
     const dateDiv = document.querySelector('span.date');
+    const appsContainer = document.querySelector('.appsContainer');
+    const template = document.getElementById('itemTemplate');
 
     function updateTime() {
         const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
@@ -36,12 +48,6 @@
 
         yearDiv.innerText = date.getFullYear();
         dateDiv.innerText = date.toLocaleString('default', { month: 'long' }).toLowerCase() + " " + date.getDate();
-
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
-
-
     }
 
     setInterval(() => {
@@ -52,6 +58,36 @@
 
     updateTime();
     updateDate();
+
+    ////////////////////////////////////////////////////////////////////////
+
+    async function loadApps() {
+        const resp = await fetch(Bridge.getAppsURL());
+        const json = await resp.json();
+
+        const apps = json.apps.sort((a, b) => {
+            if (a.label < b.label) {
+                return -1;
+            }
+            if (a.label > b.label) {
+                return 1;
+            }
+            return 0;
+        });
+
+        for (const app of json.apps) {
+            const item = template.content.firstElementChild.cloneNode(true);
+            item.querySelector('.label').innerText = app.label.toUpperCase();
+            item.addEventListener('click', () => {
+                Bridge.requestLaunchApp(app.packageName);
+            })
+            appsContainer.appendChild(item);
+        }
+    }
+
+    loadApps()
+</script>
+
 </script>
 
 </html>

@@ -20,14 +20,20 @@
         <span class="year font-[nokia-italic] ml-auto mt-[-10px]">hello</span>
     </div>
 
-    <div class="appsContainer bg-black/20 rounded-lg shadow-md
+    <div class="appsContainer bg-black/20 rounded-lg shadow-md border border-white/20
     fixed bottom-12 left-1/2 -translate-x-1/2 h-96 w-[calc(100dvw-4rem)] overflow-auto
     p-4 flex flex-col items-start font-['nokia-italic']"></div>
 
     <template id="itemTemplate">
-        <div class="app-list-item flex gap-2 items-center">
-            <img src="" alt="" class="size-10">
-            <span class="label"></span>
+        <div class="app-list-item w-full flex justify-between items-center even:bg-white/20 rounded px-2">
+            <div class="img-label flex gap-2 items-center">
+                <img src="" alt="" class="size-10">
+                <span class="label leading-none"></span>
+            </div>
+
+            <button class="appinfo">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-6" viewBox="0 0 24 24"><path fill="currentColor" d="M12 17q.425 0 .713-.288T13 16v-4q0-.425-.288-.712T12 11t-.712.288T11 12v4q0 .425.288.713T12 17m0-8q.425 0 .713-.288T13 8t-.288-.712T12 7t-.712.288T11 8t.288.713T12 9m0 13q-2.075 0-3.9-.788t-3.175-2.137T2.788 15.9T2 12t.788-3.9t2.137-3.175T8.1 2.788T12 2t3.9.788t3.175 2.137T21.213 8.1T22 12t-.788 3.9t-2.137 3.175t-3.175 2.138T12 22m0-2q3.35 0 5.675-2.325T20 12t-2.325-5.675T12 4T6.325 6.325T4 12t2.325 5.675T12 20m0-8"/></svg>
+            </button>
         </div>
     </template>
 </body>
@@ -80,8 +86,13 @@
             const item = template.content.firstElementChild.cloneNode(true);
             item.querySelector('.label').innerText = app.label.toUpperCase();
             item.querySelector('img').src = Bridge.getDefaultAppIconURL(app.packageName)
-            item.addEventListener('click', () => {
+
+            item.querySelector('.img-label').addEventListener('click', () => {
                 Bridge.requestLaunchApp(app.packageName);
+            })
+
+            item.querySelector('button.appinfo').addEventListener('click', () => {
+                Bridge.requestOpenAppInfo(app.packageName);
             })
             appsContainer.appendChild(item);
         }
@@ -89,7 +100,4 @@
 
     loadApps()
 </script>
-
-</script>
-
 </html>

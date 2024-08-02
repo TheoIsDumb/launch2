@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="output.css">
+    <link rel="stylesheet" href="style.css">
+    <title>launcher2</title>
+</head>
+
+<body class="text-white">
+    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col">
+        <span class="date font-[nokia-italic]">hello</span>
+
+        <span class="india font-['nokia-outline-italic'] text-7xl">
+            00:00:00
+        </span>
+
+        <span class="year font-[nokia-italic] ml-auto mt-[-10px]">hello</span>
+    </div>
+</body>
+
+<script>
+    const indianTimeDiv = document.querySelector('span.india');
+    const yearDiv = document.querySelector('span.year');
+    const dateDiv = document.querySelector('span.date');
+
+    function updateTime() {
+        const time = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        indianTimeDiv.innerHTML = time;
+    }
+
+    function updateDate() {
+        const date = new Date();
+
+        yearDiv.innerText = date.getFullYear();
+        dateDiv.innerText = date.toLocaleString('default', { month: 'long' }).toLowerCase() + " " + date.getDate();
+
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+
+
+    }
+
+    setInterval(() => {
+        updateTime();
+    }, 1000);
+
+    setInterval(updateDate, 10000);
+
+    updateTime();
+    updateDate();
+</script>
+
+</html>

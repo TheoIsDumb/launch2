@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'nokia-italic';
+    src: url('/nokia-italic-semibold.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'nokia-outline-italic';
+    src: url('/nokia-outline-italic-semibold.woff2') format('woff2');
+}
+
+span.india {
+    -webkit-text-stroke: 1px white;
+}

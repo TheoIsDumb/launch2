@@ -20,12 +20,13 @@
         <span class="year font-[nokia-italic] ml-auto mt-[-10px]">hello</span>
     </div>
 
-    <div class="appsContainer bg-white/20 rounded-lg
-    fixed bottom-12 left-1/2 -translate-x-1/2 h-96 w-[calc(100dvw-5rem)] overflow-auto
-    p-4 flex flex-col items-start gap-2 font-['nokia-italic']"></div>
+    <div class="appsContainer bg-black/20 rounded-lg shadow-md
+    fixed bottom-12 left-1/2 -translate-x-1/2 h-96 w-[calc(100dvw-4rem)] overflow-auto
+    p-4 flex flex-col items-start font-['nokia-italic']"></div>
 
     <template id="itemTemplate">
-        <div class="app-list-item">
+        <div class="app-list-item flex gap-2 items-center">
+            <img src="" alt="" class="size-10">
             <span class="label"></span>
         </div>
     </template>
@@ -78,6 +79,7 @@
         for (const app of json.apps) {
             const item = template.content.firstElementChild.cloneNode(true);
             item.querySelector('.label').innerText = app.label.toUpperCase();
+            item.querySelector('img').src = Bridge.getDefaultAppIconURL(app.packageName)
             item.addEventListener('click', () => {
                 Bridge.requestLaunchApp(app.packageName);
             })

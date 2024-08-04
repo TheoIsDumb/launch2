@@ -10,25 +10,27 @@
 </head>
 
 <body class="text-white">
-    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col">
-        <span class="date font-[nokia-italic]">hello</span>
+    <div class="items fixed bottom-4 w-[calc(100dvw-3rem)] left-1/2 -translate-x-1/2
+    flex flex-col gap-2 items-center">
+        <div class="time-and-stuff w-fit flex flex-col">
+            <span class="date font-[nokia-italic]"></span>
 
-        <span class="india font-['nokia-outline-italic'] text-7xl">
-            00:00:00
-        </span>
+            <span class="india font-['nokia-outline-italic'] text-7xl">
+                00:00:00
+            </span>
 
-        <span class="year font-[nokia-italic] ml-auto mt-[-10px]">hello</span>
+            <span class="year font-[nokia-italic] ml-auto mt-[-10px]">hello</span>
+        </div>
+
+        <div class="appsContainer bg-black/20 rounded-lg w-full shadow-md border border-white/20
+        h-96 overflow-auto p-4 flex flex-col items-start font-['nokia-italic']"></div>
     </div>
-
-    <div class="appsContainer bg-black/20 rounded-lg shadow-md border border-white/20
-    fixed bottom-12 left-1/2 -translate-x-1/2 h-96 w-[calc(100dvw-4rem)] overflow-auto
-    p-4 flex flex-col items-start font-['nokia-italic']"></div>
 
     <template id="itemTemplate">
         <div class="app-list-item w-full flex justify-between items-center even:bg-white/20 rounded px-2">
             <div class="img-label flex gap-2 items-center">
                 <img src="" alt="" class="size-10">
-                <span class="label leading-none"></span>
+                <span class="label text-base leading-none"></span>
             </div>
 
             <button class="appinfo">

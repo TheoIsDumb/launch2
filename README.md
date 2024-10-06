@@ -1,5 +1,8 @@
 # launch2
 
+https://github.com/user-attachments/assets/89005e7c-9ab3-4c42-a194-5ba78b3795ae
+
+
 A (very barebones) theme for [Bridge Launcher](https://github.com/bridgelauncher).
 
 Made with HTML, TailwindCSS & JS.
